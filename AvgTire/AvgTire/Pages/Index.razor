@@ -1,0 +1,333 @@
+﻿@page "/"
+@using AvgTire.Data;
+@inject TiresData TiresData;
+
+<PageTitle>Avg</PageTitle>
+
+<div class="main">
+	<SfDashboardLayout Columns="40" CellSpacing="@(new double[]{20 ,20 })" AllowDragging=false AllowResizing=false>
+		<DashboardLayoutPanels>
+			 <DashboardLayoutPanel Id="one" Column="5" Row="0" SizeX=10 SizeY=20>
+				<ContentTemplate>
+                    <div class="controlmid" align='center'>
+                        <div class="content-wrapper">
+                            <div class="row">
+                                 <div><h1>Első tábla</h1>
+                                 (tires)    
+                                 </Div>
+                                <SfGrid DataSource="@ProductGridDatafirst" AllowPaging="true" Width="90%" Height="90%">
+                                    <GridEvents TValue="AvgCalc" RowDataBound="RowBound"></GridEvents>
+                                    <GridColumns>
+@*                                         <GridColumn Field=@nameof(AvgCalc.Id) HeaderText="ID" TextAlign="TextAlign.Right" Width="60"></GridColumn>
+                                        <GridColumn Field=@nameof(AvgCalc.Number) HeaderText="Number" Width="60"></GridColumn> *@
+                                        <GridColumn Field=@nameof(AvgCalc.EventID) HeaderText="Event ID" Format="d" TextAlign="TextAlign.Right" Width="60"></GridColumn>
+@*                                         <GridColumn Field=@nameof(AvgCalc.Startdate) TextAlign="TextAlign.Right" Type="ColumnType.Date" Width="150"></GridColumn>    *@                   
+                                        <GridColumn Field=@nameof(AvgCalc.Type) HeaderText="Type" Width="20"></GridColumn>
+                                        <GridColumn Field=TimeBtwValues   HeaderText="AvgTime" Width="60" DisableHtmlEncode=false>
+                                            <Template>
+                                                @{
+
+                                                    var avg = (context as AvgCalc);
+                                                    // static DateTime FromOADate(double "@employee.TimeBtwValues");
+                                                    var localDate2 = DateTime.FromBinary((long)@avg.TimeBtwValues);
+                                                     var dateFromTicks = new DateTime((long)@avg.TimeBtwValues);
+                                                    // <input @bind="@localDate2" format-value="hh:mm:ss" />
+                                                    // ;
+                                                    <div>
+                                                         @dateFromTicks.ToString("mm:ss")
+                                                        
+                                                    </div>
+                                                     // @avg.TimeBtwValues
+                                                    // DateTime.FromOADate(@avg.TimeBtwValues);
+                                                    ;
+                                                }
+                                            </Template>
+                                        </GridColumn>
+
+                                       @*   <GridColumn Field=TrimAvg  HeaderText="Trim" Width="60" DisableHtmlEncode=false>
+                                            <Template>
+                                                @{
+
+                                                    var avg = (context as AvgCalc);
+                                                     var dateFromTicks = new DateTime((long)@avg.TrimAvg);
+
+                                                    <div>
+                                                         @dateFromTicks.ToString("mm:ss")
+                                                        
+                                                    </div>
+                                                }
+                                            </Template>
+                                        </GridColumn>
+
+                                         <GridColumn Field=Skipdata  HeaderText="Trim" Width="60" DisableHtmlEncode=false>
+                                            <Template>
+                                                @{
+
+                                                    // var avg = (context as AvgCalc);
+                                                    // <div>
+                                                    //      @avg.SkipData
+                                                        
+                                                    // </div>
+                                                }
+                                            </Template>
+                                        </GridColumn> *@
+
+                                    </GridColumns>
+                                </SfGrid>
+                            </div>
+                        </div>
+                    </div>
+				</ContentTemplate>
+			</DashboardLayoutPanel>
+            <DashboardLayoutPanel Id="one_tabletwo" Column="15" Row="10" SizeX=10 SizeY=20>
+                <ContentTemplate>
+                    <div class="controlmid" align='center'>
+                        <div class="content-wrapper">
+                            <div class="row">
+                                 <div><h1>Második tábla</h1>
+                                 (tires_2)    
+                                 </Div>
+                                <SfGrid DataSource="@ProductGridDatasecond" AllowPaging="true" Width="90%" Height="90%">
+                                 <GridEvents TValue="AvgCalc" RowDataBound="RowBound"></GridEvents>
+                                    <GridColumns>
+                                        @*                                         <GridColumn Field=@nameof(AvgCalc.Id) HeaderText="ID" TextAlign="TextAlign.Right" Width="60"></GridColumn>
+                                        <GridColumn Field=@nameof(AvgCalc.Number) HeaderText="Number" Width="60"></GridColumn> *@
+                                        <GridColumn Field=@nameof(AvgCalc.EventID) HeaderText="Event ID" Format="d" TextAlign="TextAlign.Right" Width="60"></GridColumn>
+                                        @*                                         <GridColumn Field=@nameof(AvgCalc.Startdate) TextAlign="TextAlign.Right" Type="ColumnType.Date" Width="150"></GridColumn>    *@
+                                        <GridColumn Field=@nameof(AvgCalc.Type) HeaderText="Type" Width="20"></GridColumn>
+                                        <GridColumn Field=TimeBtwValues HeaderText="AvgTime" Width="60" DisableHtmlEncode=false>
+                                            <Template>
+                                                @{
+
+                                                    var avg = (context as AvgCalc);
+                                                    // static DateTime FromOADate(double "@employee.TimeBtwValues");
+                                                    var localDate2 = DateTime.FromBinary((long)@avg.TimeBtwValues);
+                                                    // <input @bind="@localDate2" format-value="hh:mm:ss" />
+                                                     ;
+                                                    <div>
+                                                        @localDate2.ToString("mm:ss")
+                                                    </div>
+
+                                                    // DateTime.FromOADate(@avg.TimeBtwValues);
+                                                }
+                                            </Template>
+
+
+                                        </GridColumn>
+                                          @*                                        <GridColumn Field=TrimAvg  HeaderText="Trim" Width="60" DisableHtmlEncode=false>
+                                            <Template>
+                                                @{
+
+                                                    var avg = (context as AvgCalc);
+                                                     var dateFromTicks = new DateTime((long)@avg.TrimAvg);
+
+                                                    <div>
+                                                         @dateFromTicks.ToString("mm:ss")
+                                                        
+                                                    </div>
+                                                }
+                                            </Template>
+                                        </GridColumn> *@
+                                    </GridColumns>
+                                </SfGrid>
+                            </div>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </DashboardLayoutPanel>
+            <DashboardLayoutPanel Id="one_tablethird" Column="25" Row="20" SizeX=10 SizeY=20>
+                <ContentTemplate>
+                    <div class="controlmid" align='center'>
+                        <div class="content-wrapper">
+                            <div class="row">
+                                <div><h1>Harmadik tábla</h1>
+                                    (tires_3)
+                                    </Div>
+                                <SfGrid DataSource="@ProductGridDatathird" AllowPaging="true" Width="90%" Height="90%">
+                                  <GridEvents TValue="AvgCalc" RowDataBound="RowBound"></GridEvents>
+                                    <GridColumns>
+                                        @*                                         <GridColumn Field=@nameof(AvgCalc.Id) HeaderText="ID" TextAlign="TextAlign.Right" Width="60"></GridColumn>
+                                        <GridColumn Field=@nameof(AvgCalc.Number) HeaderText="Number" Width="60"></GridColumn> *@
+                                        <GridColumn Field=@nameof(AvgCalc.EventID) HeaderText="Event ID" Format="d" TextAlign="TextAlign.Right" Width="60"></GridColumn>
+                                        @*                                         <GridColumn Field=@nameof(AvgCalc.Startdate) TextAlign="TextAlign.Right" Type="ColumnType.Date" Width="150"></GridColumn>    *@
+                                        <GridColumn Field=@nameof(AvgCalc.Type) HeaderText="Type" Width="20"></GridColumn>
+                                        <GridColumn Field=TimeBtwValues HeaderText="AvgTime" Width="60" DisableHtmlEncode=false>
+                                            <Template>
+                                                @{
+
+                                                    var avg = (context as AvgCalc);
+                                                    // static DateTime FromOADate(double "@employee.TimeBtwValues");
+                                                    var localDate2 = DateTime.FromBinary((long)@avg.TimeBtwValues);
+                                                    // <input @bind="@localDate2" format-value="hh:mm:ss" />
+                                                    ;
+                                                    <div>
+                                                        @localDate2.ToString("mm:ss")
+                                                    </div>
+
+                                                    // DateTime.FromOADate(@avg.TimeBtwValues);
+                                                }
+                                            </Template>
+
+
+                                        </GridColumn>
+                                       @*   <GridColumn Field=TrimAvg  HeaderText="Trim" Width="60" DisableHtmlEncode=false>
+                                            <Template>
+                                                @{
+
+                                                    var avg = (context as AvgCalc);
+                                                     var dateFromTicks = new DateTime((long)@avg.TrimAvg);
+
+                                                    <div>
+                                                         @dateFromTicks.ToString("mm:ss")
+                                                        
+                                                    </div>
+                                                }
+                                            </Template>
+                                        </GridColumn> *@
+
+                                    </GridColumns>
+                                </SfGrid>
+                            </div>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </DashboardLayoutPanel>
+            <DashboardLayoutPanel Id="two" Column="0" Row="40" SizeX=40 SizeY=15>
+				<ContentTemplate>
+                    <div class="controlmid" align='center'>
+                        <div class="content-wrapper">
+                            <div class="row">
+                                 <div><h1>Kivételek</h1></Div>
+                                <SfGrid DataSource="@GridDataFinal" AllowPaging="true" Width="90%" Height="90%">
+                                    <GridColumns>
+                                      <GridColumn Field=@nameof(AvgCalc.Id) HeaderText="ID" TextAlign="TextAlign.Right" Width="60"></GridColumn>
+                                        <GridColumn Field=@nameof(AvgCalc.Number) HeaderText="Number" Width="60"></GridColumn> 
+                                        <GridColumn Field=@nameof(AvgCalc.EventID) HeaderText="Event ID" Format="d" TextAlign="TextAlign.Right" Width="60"></GridColumn>
+      @*                       <GridColumn Field=@nameof(AvgCalc.Startdate) TextAlign="TextAlign.Right" Type="ColumnType.Date" Width="150"></GridColumn>
+                                        <GridColumn Field=@nameof(AvgCalc.Type) HeaderText="Type" Width="60"></GridColumn> *@
+                                          <GridColumn Field=TimeBtwValues HeaderText="AvgTime" Width="60" DisableHtmlEncode=false>
+                                            <Template>
+                                                @{
+
+                                                    var avg = (context as AvgCalc);
+                                                    // static DateTime FromOADate(double "@employee.TimeBtwValues");
+                                                    var localDate2 = DateTime.FromBinary((long)@avg.TimeBtwValues);
+                                                    // <input @bind="@localDate2" format-value="hh:mm:ss" />
+                                                    ;
+                                                    <div>
+                                                        @localDate2.ToString("mm:ss")
+                                                    </div>
+
+                                                    // DateTime.FromOADate(@avg.TimeBtwValues);
+                                                }
+                                            </Template>
+
+
+                                        </GridColumn>
+                                       
+                                    </GridColumns>
+                                </SfGrid>
+                            </div>
+                        </div>
+                    </div>
+				</ContentTemplate>
+			</DashboardLayoutPanel>
+@* 			<DashboardLayoutPanel Id="three" Column="20" Row="40" SizeX=20 SizeY=10>
+				<ContentTemplate>
+				</ContentTemplate>
+			</DashboardLayoutPanel>  *@
+		</DashboardLayoutPanels>
+	</SfDashboardLayout>
+</div>
+
+@code {
+    SfGrid<Data> Grid;
+
+    public List<Data> GridData = new();
+    public List<AvgCalc> GridDataFinal = new();
+    public Dictionary<Enum, AvgCalc> GridDataFinalDictionary = new();
+    public Dictionary<Enum, AvgCalc> GridDataFinalDictionarySecond = new();
+    public Dictionary<Enum, AvgCalc> GridDataFinalDictionaryThird = new();
+
+    public List<Data> ProductGridData { get; set; }
+    public List<AvgCalc> ProductGridDatafirst { get; set; }
+    public List<AvgCalc> ProductGridDatasecond { get; set; }
+    public List<AvgCalc> ProductGridDatathird { get; set; }
+
+        public void RowBound(RowDataBoundEventArgs<AvgCalc> args)
+    {
+        if (!CloseEnoughForMe(args.Data.TrimAvg, args.Data.TimeBtwValues, 1)) 
+        {
+             args.Row.AddClass(new string[] { "eq-5" });
+            // String[] s1 = new String[1] { "eq-5" };
+            // args.Row.AddClass(s1);
+
+        }
+        else
+        {
+            args.Row.AddClass(new string[] { "normal-5" });
+        }
+    }
+    protected override async Task OnInitializedAsync()
+    {
+
+
+        GridData = await TiresData.AvgwithoutavgAsync();
+        // GridDataFinal = await TiresData.AvgFinalAsync();
+        GridDataFinal =  await await TiresData.JumpOutDataAsync();
+        GridDataFinalDictionary = await TiresData.AvgFinalDictionaryAsync();
+        GridDataFinalDictionarySecond =await TiresData.AvgFinalDictionarySecondAsync();
+        GridDataFinalDictionaryThird = await TiresData.AvgFinalDictionaryThirdAsync();
+
+
+        // ProductGridData = GridData;
+        
+        ProductGridDatafirst = GridDataFinalDictionary.Values.ToList();
+        ProductGridDatasecond = GridDataFinalDictionarySecond.Values.ToList();
+        ProductGridDatathird = GridDataFinalDictionaryThird.Values.ToList();
+
+
+        ;
+
+    }
+            static bool CloseEnoughForMe(double value1, double value2, double acceptableDifference)
+        {
+            return Math.Abs(Math.Round(value1 % 10000000) - Math.Round(value2 % 10000000)) <= acceptableDifference;
+        }
+}
+
+<style>
+    .controlmid {
+    position: absolute;
+    top: 40px;
+    bottom: 40px;
+    left: 30px;
+    right: 30px;
+         width: 100%; 
+    text-align: center;
+    font-size: 18px;
+    }
+	html, body {
+		width: 100%;
+		height: 100%;
+		margin: 0px;
+		padding: 0px;
+		overflow-x: hidden;
+	}
+	.main {
+
+		background-color: #bda685;
+		top:80px;
+		right: 400px;
+	}
+
+          .eq-5 .e-rowcell {
+        background-color: orangered;
+        color: white !important;
+       /*  background-image: linear-gradient( to top, white, white 15%, palevioletred 15%, palevioletred 85%, palevioletred 85%); */
+
+    }
+            .e-grid  .normal-5 {
+        background-color: white;
+    }
+</style>
